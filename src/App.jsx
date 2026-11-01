@@ -27,59 +27,16 @@ function App() {
     },
   ]);
 
-  const [filter, setFilter] = useState("All");
-
-  function handleToggle(id) {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task,
-      ),
-    );
-  }
-
-  function handleDelete(id) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-  }
-
-  function handleSave(id, newDescription) {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, description: newDescription } : task,
-      ),
-    );
-  }
-  function handleClearCompleted() {
-    setTasks((prevTasks) => prevTasks.filter((task) => !task.completed));
-  }
-
-  const visibleTasks = tasks.filter((task) => {
-    if (filter === "Active") return !task.completed;
-    if (filter === "Completed") return task.completed;
-
-    return true;
-  });
   return (
     <section className="todoapp">
       <header className="header">
         <h1>todos</h1>
-
         <NewTaskForm onAddTask={setTasks} />
       </header>
 
       <section className="main">
-        <TaskList
-          tasks={visibleTasks}
-          onToggle={handleToggle}
-          onDelete={handleDelete}
-          onSave={handleSave}
-        />
-
-        <Footer
-          tasks={tasks}
-          onClearCompleted={handleClearCompleted}
-          filter={filter}
-          onFilterChange={setFilter}
-        />
+        <TaskList tasks={tasks} />
+        <Footer tasks={tasks} />
       </section>
     </section>
   );

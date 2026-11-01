@@ -1,16 +1,11 @@
-function TasksFilter({ filter, onFilterChange }) {
-  const filters = ['All', 'Active', 'Completed'];
+function TasksFilter() {
+  const filters = ["All", "Active", "Completed"];
 
   return (
     <ul className="filters">
-      {filters.map(item => (
+      {filters.map((item) => (
         <li key={item}>
-          <button
-            className={filter === item ? 'selected' : ''}
-            onClick={() => onFilterChange(item)}
-          >
-            {item}
-          </button>
+          <button className={item === "All" ? "selected" : ""}>{item}</button>
         </li>
       ))}
     </ul>
